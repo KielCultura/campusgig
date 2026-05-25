@@ -6,6 +6,7 @@
   <title>CampusGig • Student Services</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     :root { --primary: #10b981; --primary-dark: #059669; }
@@ -1139,104 +1140,89 @@ async function loadAndShowAdminBookings() {
 
 
 // ══════════════════════════════════════════════════════════════════════════════
-//  REAL-TIME MESSAGING  (WebSocket → ws://localhost:8080)
+//  REAL-TIME MESSAGING  (Pusher-powered)
 // ══════════════════════════════════════════════════════════════════════════════
-let ws               = null;
-let wsReady          = false;
-let wsQueue          = [];          // messages queued before connection ready
+
+// ⚠️ Replace these with your actual Pusher credentials
+const PUSHER_KEY     = 'YOUR_PUSHER_KEY';
+const PUSHER_CLUSTER = 'YOUR_PUSHER_CLUSTER';
+const CHAT_API       = 'chat.php';
+
+let pusher           = null;
+let pusherChannel    = null;
 let activeConvId     = null;
-let allUsers         = [];          // for new-chat user picker
+let allUsers         = [];
 let msgConversations = [];
 
-// ── Connect to WebSocket server ───────────────────────────────────────────────
+// ── Init Pusher for current user ──────────────────────────────────────────────
 function connectWS() {
-  if (ws && ws.readyState === WebSocket.OPEN) return;
+  if (pusher) return;
+  pusher = new Pusher(PUSHER_KEY, { cluster: PUSHER_CLUSTER });
+  // Subscribe to this user's private channel
+  pusherChannel = pusher.subscribe('user-' + currentUser.id);
+  // New message arriving
+  pusherChannel.bind('new-message', function(data) {
+    if (data.conversation_id == activeConvId) {
+      appendMessage(data.message);
+      markRead(activeConvId);
+    } else {
+      loadConversations();
+      if (data.message?.sender && data.message.sender !== currentUser.name) {
+        addNotification('message', `New message from ${data.message.sender}.`);
+      }
+    }
+    updateUnreadBadge();
+  });
+  loadConversations();
+}
+
+// ── REST helpers ──────────────────────────────────────────────────────────────
+async function chatFetch(action, body = {}) {
   try {
-    ws = new WebSocket('ws://localhost:8080');
+    const res = await fetch(CHAT_API + '?action=' + action, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...body, user_id: currentUser.id })
+    });
+    const json = await res.json();
+    return json.ok ? json.data : null;
   } catch(e) {
-    console.warn('WS connect failed:', e);
-    return;
-  }
-
-  ws.onopen = () => {
-    wsReady = true;
-    // Authenticate
-    wsSend({ type: 'auth', user_id: currentUser.id });
-    // Flush queued messages
-    wsQueue.forEach(m => ws.send(JSON.stringify(m)));
-    wsQueue = [];
-    // Load conversations
-    wsSend({ type: 'get_conversations', user_id: currentUser.id });
-  };
-
-  ws.onmessage = (evt) => {
-    const data = JSON.parse(evt.data);
-    handleWSMessage(data);
-  };
-
-  ws.onclose = () => {
-    wsReady = false;
-    // Attempt reconnect after 3s
-    setTimeout(() => { if (currentUser) connectWS(); }, 3000);
-  };
-
-  ws.onerror = (e) => console.warn('WS error', e);
-}
-
-function wsSend(obj) {
-  if (wsReady && ws.readyState === WebSocket.OPEN) {
-    ws.send(JSON.stringify(obj));
-  } else {
-    wsQueue.push(obj);
-    if (!ws || ws.readyState === WebSocket.CLOSED) connectWS();
+    console.warn('Chat API error:', e);
+    return null;
   }
 }
 
-// ── Handle incoming WebSocket messages ───────────────────────────────────────
-function handleWSMessage(data) {
-  switch (data.type) {
+async function loadConversations() {
+  const data = await chatFetch('get_conversations');
+  if (data) { msgConversations = data; renderConvList(); }
+}
 
-    case 'unread_count':
-      updateUnreadBadge(data.count);
-      break;
+async function markRead(convId) {
+  await chatFetch('mark_read', { conversation_id: convId });
+}
 
-    case 'conversations':
-      msgConversations = data.conversations;
-      renderConvList();
-      break;
-
-    case 'conversation_opened':
-      activeConvId = data.conversation_id;
-      wsSend({ type: 'get_messages', conversation_id: activeConvId, user_id: currentUser.id });
-      break;
-
-    case 'messages':
-      if (data.conversation_id == activeConvId) {
-        renderMessages(data.messages);
-        // Refresh conv list to clear unread badge
-        wsSend({ type: 'get_conversations', user_id: currentUser.id });
+async function updateUnreadBadge() {
+  const data = await chatFetch('unread_count');
+  if (data !== null) {
+    document.querySelectorAll('#sidebarNav .sidebar-link').forEach(el => {
+      if (el.textContent.trim().startsWith('Messages')) {
+        let dot = el.querySelector('.msg-dot');
+        if (data > 0) {
+          if (!dot) {
+            dot = document.createElement('span');
+            dot.className = 'msg-dot';
+            dot.style.cssText = 'margin-left:auto;background:#ef4444;color:white;border-radius:999px;font-size:11px;font-weight:700;padding:1px 7px;';
+            el.appendChild(dot);
+          }
+          dot.textContent = data;
+        } else if (dot) { dot.remove(); }
       }
-      break;
-
-    case 'new_message':
-      if (data.conversation_id == activeConvId) {
-        appendMessage(data.message);
-        // Mark read since we're in the conv
-        wsSend({ type: 'get_messages', conversation_id: activeConvId, user_id: currentUser.id });
-      } else {
-        // Update conv list to show unread
-        wsSend({ type: 'get_conversations', user_id: currentUser.id });
-        if (data.message?.sender && data.message.sender !== currentUser.name) {
-          addNotification('message', `New message from ${data.message.sender}.`);
-        }
-      }
-      break;
+    });
   }
 }
 
 // ── Open the Messages view ────────────────────────────────────────────────────
 function openMessages() {
-  // Rebuild sidebar with messages active
   const role = currentUser.role;
   if (role === 'student') renderStudentDashboard('messages');
   else if (role === 'tutor') renderTutorDashboard('messages');
@@ -1246,15 +1232,13 @@ function openMessages() {
   M.innerHTML = `
     <div class="fade-in" style="height:calc(100vh - 96px);">
       <div class="chat-layout" style="height:100%;">
-        <!-- LEFT: conversation list -->
         <div class="conv-list" id="convListPanel">
-          <div style="padding:16px; border-bottom:1px solid #f1f5f9; display:flex; align-items:center; justify-content:space-between;">
+          <div style="padding:16px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;">
             <span class="font-bold font-display text-lg">Messages</span>
             <button class="new-chat-btn" onclick="openNewChatModal()">+ New Chat</button>
           </div>
-          <div id="convListInner"><div style="padding:24px;text-align:center;color:#94a3b8;font-size:13px;">Connecting…</div></div>
+          <div id="convListInner"><div style="padding:24px;text-align:center;color:#94a3b8;font-size:13px;">Loading…</div></div>
         </div>
-        <!-- RIGHT: chat area -->
         <div class="chat-area" id="chatArea">
           <div class="chat-empty" id="chatEmpty">
             <div style="font-size:48px;">💬</div>
@@ -1267,10 +1251,7 @@ function openMessages() {
     </div>`;
 
   connectWS();
-  // Load users for new-chat modal
   apiFetch('users').then(data => { if (data) allUsers = data; });
-  // Request conversations
-  if (wsReady) wsSend({ type: 'get_conversations', user_id: currentUser.id });
 }
 
 // ── Render conversation list ──────────────────────────────────────────────────
@@ -1299,12 +1280,12 @@ function roleColor(role) {
 }
 
 // ── Open a specific conversation ──────────────────────────────────────────────
-function openConversation(convId) {
+async function openConversation(convId) {
   activeConvId = convId;
   const conv = msgConversations.find(c => c.id == convId);
-
   const area = document.getElementById('chatArea');
   if (!area) return;
+
   area.innerHTML = `
     <div class="chat-header">
       <div class="conv-avatar" style="width:38px;height:38px;font-size:16px;background:${roleColor(conv?.other_role)}">${(conv?.other_name||'?')[0].toUpperCase()}</div>
@@ -1313,18 +1294,21 @@ function openConversation(convId) {
         <p class="text-xs text-zinc-400 capitalize">${conv?.other_role || ''}</p>
       </div>
     </div>
-    <div class="chat-messages" id="msgList"></div>
+    <div class="chat-messages" id="msgList"><div style="text-align:center;color:#94a3b8;padding:24px;font-size:13px;">Loading…</div></div>
     <div class="chat-input-area">
       <textarea id="msgInput" class="chat-input" rows="1" placeholder="Type a message…"
         onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage();}"></textarea>
       <button class="chat-send-btn" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
     </div>`;
 
-  renderConvList(); // re-render to highlight active
-  wsSend({ type: 'get_messages', conversation_id: convId, user_id: currentUser.id });
+  renderConvList();
+  const msgs = await chatFetch('get_messages', { conversation_id: convId });
+  if (msgs) renderMessages(msgs);
+  await markRead(convId);
+  await loadConversations();
 }
 
-// ── Render messages in active chat ────────────────────────────────────────────
+// ── Render messages ───────────────────────────────────────────────────────────
 function renderMessages(msgs) {
   const list = document.getElementById('msgList');
   if (!list) return;
@@ -1361,13 +1345,14 @@ function escapeHtml(s) {
 }
 
 // ── Send a message ────────────────────────────────────────────────────────────
-function sendMessage() {
+async function sendMessage() {
   const input = document.getElementById('msgInput');
   const body  = input?.value.trim();
   if (!body || !activeConvId) return;
-  wsSend({ type: 'send_message', sender_id: currentUser.id, conversation_id: activeConvId, body });
   input.value = '';
   input.style.height = 'auto';
+  const msg = await chatFetch('send_message', { conversation_id: activeConvId, body });
+  if (msg) appendMessage(msg);
 }
 
 // ── New Chat modal ────────────────────────────────────────────────────────────
@@ -1399,7 +1384,7 @@ function openNewChatModal() {
 
 function filterUserList(q) {
   const others = allUsers.filter(u => u.id != currentUser.id);
-  const filtered = q ? others.filter(u => u.name.toLowerCase().includes(q.toLowerCase()) || u.role.includes(q.toLowerCase())) : others;
+  const filtered = q ? others.filter(u => u.name.toLowerCase().includes(q.toLowerCase())) : others;
   document.getElementById('userPickerList').innerHTML = filtered.map(u => `
     <div class="conv-item rounded-xl" onclick="startChatWith(${u.id})">
       <div class="conv-avatar" style="background:${roleColor(u.role)}">${u.name[0].toUpperCase()}</div>
@@ -1407,44 +1392,16 @@ function filterUserList(q) {
     </div>`).join('');
 }
 
-function startChatWith(otherUserId) {
+async function startChatWith(otherUserId) {
   document.getElementById('newChatModal')?.remove();
-  wsSend({ type: 'open_conversation', user_id: currentUser.id, other_user_id: otherUserId });
-  // openMessages() is already rendered, just wait for conversation_opened event
   if (!document.getElementById('convListPanel')) openMessages();
+  const conv = await chatFetch('open_conversation', { other_user_id: otherUserId });
+  if (conv) {
+    await loadConversations();
+    openConversation(conv.id);
+  }
 }
 
-// ── Unread badge on sidebar ───────────────────────────────────────────────────
-function updateUnreadBadge(count) {
-  // Update all message nav items
-  document.querySelectorAll('#sidebarNav .sidebar-link').forEach(el => {
-    if (el.textContent.trim().startsWith('Messages')) {
-      let dot = el.querySelector('.msg-dot');
-      if (count > 0) {
-        if (!dot) {
-          dot = document.createElement('span');
-          dot.className = 'msg-dot';
-          dot.style.cssText = 'margin-left:auto;background:#ef4444;color:white;border-radius:999px;font-size:11px;font-weight:700;padding:1px 7px;';
-          el.appendChild(dot);
-        }
-        dot.textContent = count;
-      } else if (dot) {
-        dot.remove();
-      }
-    }
-  });
-}
-
-// Disconnect WS on logout
-const _origLogout = logout;
-function logout() {
-  if (ws) { ws.close(); ws = null; wsReady = false; }
-  activeConvId = null; msgConversations = [];
-  document.getElementById('notifBell')?.classList.add('hidden');
-  _origLogout();
-}
-
-// connectWS is called in showDashboard directly (see showDashboard function)
 
 // ══════════════════════════════════════════════════════════════════════════════
 //  BOOKMARKS (Saved Gigs)

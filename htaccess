@@ -1,0 +1,9 @@
+Options -Indexes
+RewriteEngine On
+
+# Route all requests to existing files normally
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# Send everything else to index.html
+RewriteRule ^ index.html [L]
