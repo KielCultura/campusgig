@@ -4,7 +4,7 @@
  */
 
 // ── CORS — must be absolute first thing, before any output ───────────────────
-$allowed_origins = ['https://kielcultura.github.io'];
+$allowed_origins = ['https://kielcultura.github.io', 'https://campusgig-r5tz.onrender.com'];
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
 if ($origin && in_array($origin, $allowed_origins, true)) {

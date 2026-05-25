@@ -11,7 +11,7 @@
  */
 
 header('Content-Type: application/json');
-$allowed = ['https://kielcultura.github.io'];
+$allowed = ['https://kielcultura.github.io', 'https://campusgig-r5tz.onrender.com'];
 $origin  = $_SERVER['HTTP_ORIGIN'] ?? '';
 if ($origin && in_array($origin, $allowed, true)) {
     header('Access-Control-Allow-Origin: ' . $origin);
