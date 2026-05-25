@@ -19,7 +19,7 @@
       <div class="flex items-center gap-8">
         <div class="flex items-center gap-2 cursor-pointer" onclick="showLanding()">
           <div><img src="insights.png" alt="Logo" class="w-10 h-10"></div>
-          <span class="font-bold text-xl tracking-tight text-zinc-900 font-display">In<span class="text-emerald-500">sight</span></span>
+          <span class="font-bold text-xl tracking-tight text-zinc-900 font-display">In<span class="text-[#272747]">sight</span></span>
         </div>
         <div class="hidden md:flex items-center bg-zinc-100 rounded-full px-5 py-2 w-80">
           <i class="fa-solid fa-magnifying-glass text-zinc-400 mr-3 text-sm"></i>
@@ -56,13 +56,13 @@
             <div id="notifPanel" class="notif-panel hidden">
               <div class="p-4 border-b flex items-center justify-between">
                 <span class="font-bold font-display">Notifications</span>
-                <button onclick="markAllNotifsRead()" class="text-xs text-emerald-600 font-semibold hover:underline">Mark all read</button>
+                <button onclick="markAllNotifsRead()" class="text-xs text-[#272747] font-semibold hover:underline">Mark all read</button>
               </div>
               <div id="notifList" class="overflow-y-auto" style="max-height:380px;"></div>
             </div>
           </div>
           <button onclick="openAuthModal('login')" class="px-5 py-2.5 text-sm font-semibold text-zinc-700 hover:bg-zinc-100 rounded-xl transition">Log in</button>
-          <button onclick="openAuthModal('register')" class="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-xl transition">Join Free</button>
+          <button onclick="openAuthModal('register')" class="px-5 py-2.5 bg-[#272747] hover:bg-[#272747] text-white font-semibold rounded-xl transition">Join Free</button>
         </div>
       </div>
     </div>
@@ -71,10 +71,10 @@
   <!-- Hero -->
   <header class="hero-bg text-white py-28">
     <div class="max-w-5xl mx-auto px-6 text-center">
-      <div class="inline-flex items-center gap-2 bg-emerald-500/20 text-emerald-300 rounded-full px-5 py-2 text-sm font-semibold mb-6 border border-emerald-500/30">
-        <span class="w-2 h-2 bg-emerald-400 rounded-full"></span> Peer to peer power at:
+      <div class="inline-flex items-center gap-2 bg-[#272747]/20 text-[#272747] rounded-full px-5 py-2 text-sm font-semibold mb-6 border border-[#272747]/30">
+        <span class="w-2 h-2 bg-[#272747]/15 rounded-full"></span> Peer to peer power at:
       </div>
-      <h1 class="text-6xl font-bold tracking-tight mb-5 font-display">In<span class="text-emerald-400">sights</span></h1>
+      <h1 class="text-6xl font-bold tracking-tight mb-5 font-display">In<span class="text-[#272747]">sights</span></h1>
       <p class="text-xl text-zinc-300 mb-10 max-w-2xl mx-auto">Find, Earn, Learn, Succeed</p>
       <div class="max-w-xl mx-auto">
         <div class="bg-white rounded-3xl p-2 flex items-center shadow-2xl">
@@ -83,7 +83,7 @@
               class="w-full outline-none text-zinc-800 text-base"
               onkeydown="if(event.key==='Enter') performSearch()">
           </div>
-          <button onclick="performSearch()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3.5 rounded-2xl font-semibold flex items-center gap-2 transition">
+          <button onclick="performSearch()" class="bg-[#272747] hover:bg-[#272747] text-white px-8 py-3.5 rounded-2xl font-semibold flex items-center gap-2 transition">
             <i class="fa-solid fa-search text-sm"></i> Search
           </button>
         </div>
@@ -105,7 +105,7 @@
           <h2 class="text-3xl font-bold font-display">Featured Student Services</h2>
           <p class="text-zinc-500 mt-1">Curated by peer ratings</p>
         </div>
-        <button onclick="showAllGigs()" class="text-emerald-600 hover:text-emerald-700 font-semibold flex items-center gap-2">
+        <button onclick="showAllGigs()" class="text-[#272747] hover:text-[#272747] font-semibold flex items-center gap-2">
           Browse All <i class="fa-solid fa-arrow-right"></i>
         </button>
       </div>
@@ -120,17 +120,17 @@
       <p class="text-center text-zinc-500 max-w-md mx-auto mb-16">Three simple steps to start learning from your peers</p>
       <div class="grid md:grid-cols-3 gap-10">
         <div class="text-center">
-          <div class="w-20 h-20 mx-auto bg-emerald-100 text-emerald-600 rounded-3xl flex items-center justify-center text-4xl mb-6">🔍</div>
+          <div class="w-20 h-20 mx-auto bg-[#272747]/10 text-[#272747] rounded-3xl flex items-center justify-center text-4xl mb-6">🔍</div>
           <h3 class="font-semibold text-xl mb-2 font-display">1. Browse & Search</h3>
           <p class="text-zinc-500">Find talented students offering services in your campus or online</p>
         </div>
         <div class="text-center">
-          <div class="w-20 h-20 mx-auto bg-emerald-100 text-emerald-600 rounded-3xl flex items-center justify-center text-4xl mb-6">💬</div>
+          <div class="w-20 h-20 mx-auto bg-[#272747]/10 text-[#272747] rounded-3xl flex items-center justify-center text-4xl mb-6">💬</div>
           <h3 class="font-semibold text-xl mb-2 font-display">2. Message & Book</h3>
           <p class="text-zinc-500">Chat directly and schedule a session that fits your timetable</p>
         </div>
         <div class="text-center">
-          <div class="w-20 h-20 mx-auto bg-emerald-100 text-emerald-600 rounded-3xl flex items-center justify-center text-4xl mb-6">⭐</div>
+          <div class="w-20 h-20 mx-auto bg-[#272747]/10 text-[#272747] rounded-3xl flex items-center justify-center text-4xl mb-6">⭐</div>
           <h3 class="font-semibold text-xl mb-2 font-display">3. Learn & Review</h3>
           <p class="text-zinc-500">Attend the session and leave a review to help others</p>
         </div>
@@ -144,7 +144,7 @@
       <div class="grid grid-cols-2 md:grid-cols-5 gap-10">
         <div>
           <div class="flex items-center gap-2 text-white mb-5">
-            <div class="w-8 h-8 bg-emerald-500 rounded-xl flex items-center justify-center font-bold font-display">C</div>
+            <div class="w-8 h-8 bg-[#272747] rounded-xl flex items-center justify-center font-bold font-display">C</div>
             <span class="font-bold text-xl font-display">Insight</span>
           </div>
           <p class="text-sm">Student-powered learning for UC and beyond.</p>
@@ -219,7 +219,7 @@
       <div class="flex justify-between items-center mb-6">
         <div>
           <div class="flex items-center gap-2 mb-1">
-            <div class="w-7 h-7 bg-emerald-500 rounded-xl flex items-center justify-center text-white font-bold text-sm font-display">C</div>
+            <div class="w-7 h-7 bg-[#272747] rounded-xl flex items-center justify-center text-white font-bold text-sm font-display">C</div>
             <span class="font-bold text-lg font-display">Insight</span>
           </div>
           <p class="text-zinc-500 text-sm" id="authSubtitle">Welcome back!</p>
@@ -242,7 +242,7 @@
           <p class="text-xs font-semibold text-zinc-500 mb-3 uppercase tracking-wide">Demo Accounts</p>
           <div class="grid grid-cols-3 gap-2">
             <button onclick="fillDemo('student')" class="text-xs py-2 px-3 rounded-xl bg-blue-50 text-blue-700 font-semibold hover:bg-blue-100 transition">👨‍🎓 Student</button>
-            <button onclick="fillDemo('tutor')"   class="text-xs py-2 px-3 rounded-xl bg-emerald-50 text-emerald-700 font-semibold hover:bg-emerald-100 transition">👨‍🏫 Tutor</button>
+            <button onclick="fillDemo('tutor')"   class="text-xs py-2 px-3 rounded-xl bg-[#272747]/10 text-[#272747] font-semibold hover:bg-[#272747]/10 transition">👨‍🏫 Tutor</button>
             <button onclick="fillDemo('admin')"   class="text-xs py-2 px-3 rounded-xl bg-orange-50 text-orange-700 font-semibold hover:bg-orange-100 transition">⚙️ Admin</button>
           </div>
         </div>
@@ -271,11 +271,11 @@
 <div id="dashboardView">
   <div class="dashboard-sidebar">
     <div class="flex items-center gap-2 mb-8 px-2">
-      <div class="w-8 h-8 bg-emerald-500 rounded-xl flex items-center justify-center text-white font-bold font-display">C</div>
+      <div class="w-8 h-8 bg-[#272747] rounded-xl flex items-center justify-center text-white font-bold font-display">C</div>
       <span class="font-bold text-white text-lg font-display">Insight</span>
     </div>
     <div class="flex items-center gap-3 px-2 mb-8">
-      <div id="sidebarAvatar" class="w-10 h-10 rounded-2xl bg-emerald-500 flex items-center justify-center text-white font-bold text-lg"></div>
+      <div id="sidebarAvatar" class="w-10 h-10 rounded-2xl bg-[#272747] flex items-center justify-center text-white font-bold text-lg"></div>
       <div>
         <p id="sidebarName" class="text-white font-semibold text-sm"></p>
         <p id="sidebarRole" class="text-zinc-400 text-xs capitalize"></p>
@@ -308,3 +308,5 @@
 
 </body>
 </html>
+
+

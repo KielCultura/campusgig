@@ -43,18 +43,18 @@ function renderAdminHome(M, rev, pend) {
     </div>` : ''}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="card">
-        <div class="p-5 border-b flex items-center justify-between"><p class="font-bold font-display">Recent Bookings</p><button onclick="loadAndShowAdminBookings()" class="text-xs text-emerald-600 font-semibold">View All →</button></div>
+        <div class="p-5 border-b flex items-center justify-between"><p class="font-bold font-display">Recent Bookings</p><button onclick="loadAndShowAdminBookings()" class="text-xs text-[#272747] font-semibold">View All →</button></div>
         <table class="data-table"><thead><tr><th>Student</th><th>Tutor</th><th>Status</th><th>Fee</th></tr></thead><tbody>
           ${bookings.slice(0, 4).map(b => `<tr>
             <td class="text-sm font-medium">${b.student}</td>
             <td class="text-sm text-zinc-600">${b.tutor}</td>
             <td><span class="badge ${b.status==='confirmed'?'badge-green':b.status==='pending'?'badge-yellow':b.status==='completed'?'badge-blue':'badge-red'} text-xs">${b.status}</span></td>
-            <td class="text-sm font-semibold text-emerald-600">&#8369;${b.total}</td>
+            <td class="text-sm font-semibold text-[#272747]">&#8369;${b.total}</td>
           </tr>`).join('')}
         </tbody></table>
       </div>
       <div class="card">
-        <div class="p-5 border-b flex items-center justify-between"><p class="font-bold font-display">Recent Users</p><button onclick="renderAdminDashboard('users')" class="text-xs text-emerald-600 font-semibold">View All →</button></div>
+        <div class="p-5 border-b flex items-center justify-between"><p class="font-bold font-display">Recent Users</p><button onclick="renderAdminDashboard('users')" class="text-xs text-[#272747] font-semibold">View All →</button></div>
         <table class="data-table"><thead><tr><th>Name</th><th>Role</th><th>Status</th></tr></thead><tbody>
           ${users.slice(0, 5).map(u => `<tr>
             <td><div class="flex items-center gap-2"><img src="${u.avatar}" class="avatar w-7 h-7"><span class="text-sm font-medium">${u.name}</span></div></td>
@@ -102,7 +102,7 @@ function renderAdminServices(M, pend) {
               <p class="font-semibold text-sm">${g.title}</p>
               <p class="text-xs text-zinc-500">${g.tutor} • ${g.category} • &#8369;${g.price}/hr</p>
               <div class="flex gap-2 mt-3">
-                <button onclick="approveG(${g.id})" class="text-xs bg-emerald-500 text-white px-3 py-1.5 rounded-lg hover:bg-emerald-600 font-semibold">Approve</button>
+                <button onclick="approveG(${g.id})" class="text-xs bg-[#272747] text-white px-3 py-1.5 rounded-lg hover:bg-[#272747] font-semibold">Approve</button>
                 <button onclick="rejectG(${g.id})" class="text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg hover:bg-red-100">Reject</button>
               </div>
             </div>
@@ -115,10 +115,10 @@ function renderAdminServices(M, pend) {
         <td><div class="flex items-center gap-2"><img src="${g.image}" class="w-9 h-9 rounded-lg object-cover"><p class="font-medium text-sm">${g.title}</p></div></td>
         <td class="text-sm">${g.tutor}</td>
         <td><span class="badge badge-blue text-xs">${g.category}</span></td>
-        <td class="font-semibold text-emerald-600">&#8369;${g.price}</td>
+        <td class="font-semibold text-[#272747]">&#8369;${g.price}</td>
         <td><span class="badge ${g.status==='approved'?'badge-green':g.status==='pending'?'badge-yellow':'badge-red'}">${g.status}</span></td>
         <td class="flex gap-2">
-          ${g.status === 'pending' ? `<button onclick="approveG(${g.id})" class="text-xs bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-lg font-semibold hover:bg-emerald-100">Approve</button>` : ''}
+          ${g.status === 'pending' ? `<button onclick="approveG(${g.id})" class="text-xs bg-[#272747]/10 text-[#272747] px-3 py-1.5 rounded-lg font-semibold hover:bg-[#272747]/10">Approve</button>` : ''}
           <button onclick="adminDelGig(${g.id})" class="text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg hover:bg-red-100">Remove</button>
         </td>
       </tr>`).join('')}
@@ -138,7 +138,7 @@ function renderAdminBookings(M) {
         <td class="text-sm text-zinc-600">${g ? g.title.substring(0, 28) + '…' : 'N/A'}</td>
         <td class="text-sm">${b.date}</td>
         <td><span class="badge ${b.status==='confirmed'?'badge-green':b.status==='pending'?'badge-yellow':b.status==='completed'?'badge-blue':'badge-red'}">${b.status}</span></td>
-        <td class="font-semibold text-emerald-600">&#8369;${b.total}</td>
+        <td class="font-semibold text-[#272747]">&#8369;${b.total}</td>
       </tr>`; }).join('')}
     </tbody></table></div>
   </div>`;
@@ -155,17 +155,17 @@ function renderAdminReports(M, rev) {
     <p class="text-zinc-500 mb-8">Platform performance overview.</p>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="card p-6"><h3 class="font-bold font-display mb-4">Services by Category</h3>
-        ${Object.entries(byCat).map(([c, n]) => { const p = Math.round(n / gigs.length * 100); return `<div class="mb-3"><div class="flex justify-between text-sm mb-1"><span class="font-medium">${c}</span><span class="text-zinc-500">${n} (${p}%)</span></div><div class="bg-zinc-100 rounded-full h-2"><div class="bg-emerald-500 h-2 rounded-full" style="width:${p}%"></div></div></div>`; }).join('')}
+        ${Object.entries(byCat).map(([c, n]) => { const p = Math.round(n / gigs.length * 100); return `<div class="mb-3"><div class="flex justify-between text-sm mb-1"><span class="font-medium">${c}</span><span class="text-zinc-500">${n} (${p}%)</span></div><div class="bg-zinc-100 rounded-full h-2"><div class="bg-[#272747] h-2 rounded-full" style="width:${p}%"></div></div></div>`; }).join('')}
       </div>
       <div class="card p-6"><h3 class="font-bold font-display mb-4">Bookings by Status</h3>
-        ${Object.entries(bySt).map(([st, n]) => { const p = Math.round(n / bookings.length * 100); const c = {confirmed:'bg-emerald-500',pending:'bg-amber-400',completed:'bg-blue-500',cancelled:'bg-red-400',declined:'bg-red-400'}[st] || 'bg-zinc-400'; return `<div class="mb-3"><div class="flex justify-between text-sm mb-1"><span class="font-medium capitalize">${st}</span><span class="text-zinc-500">${n} (${p}%)</span></div><div class="bg-zinc-100 rounded-full h-2"><div class="${c} h-2 rounded-full" style="width:${p}%"></div></div></div>`; }).join('')}
+        ${Object.entries(bySt).map(([st, n]) => { const p = Math.round(n / bookings.length * 100); const c = {confirmed:'bg-[#272747]',pending:'bg-amber-400',completed:'bg-blue-500',cancelled:'bg-red-400',declined:'bg-red-400'}[st] || 'bg-zinc-400'; return `<div class="mb-3"><div class="flex justify-between text-sm mb-1"><span class="font-medium capitalize">${st}</span><span class="text-zinc-500">${n} (${p}%)</span></div><div class="bg-zinc-100 rounded-full h-2"><div class="${c} h-2 rounded-full" style="width:${p}%"></div></div></div>`; }).join('')}
       </div>
       <div class="card p-6"><h3 class="font-bold font-display mb-4">User Breakdown</h3>
         ${[['Students','badge-blue', users.filter(u=>u.role==='student').length], ['Tutors','badge-green', users.filter(u=>u.role==='tutor').length], ['Admins','badge-red', users.filter(u=>u.role==='admin').length]].map(([l,b,n]) => `<div class="flex items-center justify-between py-3 border-b last:border-0"><span class="badge ${b}">${l}</span><span class="font-bold text-xl">${n}</span></div>`).join('')}
       </div>
       <div class="card p-6"><h3 class="font-bold font-display mb-4">Financial Summary</h3>
         <div class="space-y-3">
-          <div class="flex justify-between py-3 border-b"><span class="text-zinc-500">Total Revenue</span><span class="font-bold text-emerald-600">&#8369;${rev}</span></div>
+          <div class="flex justify-between py-3 border-b"><span class="text-zinc-500">Total Revenue</span><span class="font-bold text-[#272747]">&#8369;${rev}</span></div>
           <div class="flex justify-between py-3 border-b"><span class="text-zinc-500">Completed Sessions</span><span class="font-bold">${bookings.filter(b => b.status === 'completed').length}</span></div>
           <div class="flex justify-between py-3"><span class="text-zinc-500">Avg Session Value</span><span class="font-bold">&#8369;${bookings.length ? Math.round(bookings.reduce((s, b) => s + b.total, 0) / bookings.length) : 0}</span></div>
         </div>
@@ -217,3 +217,4 @@ export async function loadAndShowAdminBookings() {
   await loadBookings();
   renderAdminDashboard('bookings');
 }
+

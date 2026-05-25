@@ -24,7 +24,7 @@ export function renderGigs(list) {
         </div>
         <h3 class="font-semibold text-base mb-4 leading-snug">${g.title}</h3>
         <div class="flex justify-between items-center">
-          <div><span class="text-emerald-600 font-bold text-xl">&#8369;${g.price}</span><span class="text-zinc-400 text-xs">/hr</span></div>
+          <div><span class="text-[#272747] font-bold text-xl">&#8369;${g.price}</span><span class="text-zinc-400 text-xs">/hr</span></div>
           <div class="flex items-center gap-1 text-sm"><i class="fa-solid fa-star text-amber-400 text-xs"></i><span class="text-zinc-700 font-semibold">${g.rating}</span><span class="text-zinc-400 text-xs">(${g.reviews})</span></div>
         </div>
       </div>
@@ -38,7 +38,7 @@ export function showGigDetail(gigId) {
   if (!g) return;
   document.getElementById('modalContent').innerHTML = `
     <div class="flex justify-between items-start mb-5">
-      <div><span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-full">${g.category}</span>
+      <div><span class="px-3 py-1 bg-[#272747]/10 text-[#272747] text-xs font-semibold rounded-full">${g.category}</span>
       <h2 class="text-2xl font-bold mt-2 font-display">${g.title}</h2></div>
       <button onclick="hideModal()" class="w-9 h-9 rounded-full bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center text-xl text-zinc-400">×</button>
     </div>
@@ -53,7 +53,7 @@ export function showGigDetail(gigId) {
     </div>
     <p class="text-zinc-600 mb-6 leading-relaxed">${g.desc}</p>
     <div class="bg-zinc-50 border rounded-2xl p-5 flex items-center justify-between">
-      <div><p class="text-xs text-zinc-400">Starting at</p><p class="text-3xl font-bold text-emerald-600">&#8369;${g.price}<span class="text-sm text-zinc-400 font-normal">/hr</span></p></div>
+      <div><p class="text-xs text-zinc-400">Starting at</p><p class="text-3xl font-bold text-[#272747]">&#8369;${g.price}<span class="text-sm text-zinc-400 font-normal">/hr</span></p></div>
       <div class="flex gap-2">
         <button onclick="toggleBookmark(${g.id})" id="bm_modal_${g.id}" class="bookmark-btn${savedGigs.has(g.id) ? ' saved' : ''}">${savedGigs.has(g.id) ? '🔖' : '🔲'}</button>
         <button onclick="bookSession(${g.id})" class="btn-primary">Book a Session</button>
@@ -72,7 +72,7 @@ export function showGigDetail(gigId) {
           <button onclick="submitReview(${g.id})" class="btn-primary text-sm py-2 px-4">Submit Review</button>
         </div>` : `
         <p class="text-sm text-zinc-400 mt-3 text-center">
-          <span class="text-emerald-600 cursor-pointer font-medium" onclick="hideModal();openAuthModal('login')">Log in</span> to leave a review
+          <span class="text-[#272747] cursor-pointer font-medium" onclick="hideModal();openAuthModal('login')">Log in</span> to leave a review
         </p>`}
     </div>`;
   document.getElementById('gigModal').classList.add('active');
@@ -157,7 +157,7 @@ export function gigCardDash(g) {
       </div>
       <p class="font-semibold leading-snug mb-3">${g.title}</p>
       <div class="flex items-center justify-between">
-        <span class="text-emerald-600 font-bold text-lg">&#8369;${g.price}<span class="text-xs text-zinc-400 font-normal">/hr</span></span>
+        <span class="text-[#272747] font-bold text-lg">&#8369;${g.price}<span class="text-xs text-zinc-400 font-normal">/hr</span></span>
         <span class="text-sm">⭐ ${g.rating}</span>
       </div>
     </div>
@@ -173,7 +173,7 @@ export function showGigDetailDash(gigId) {
   el.id = 'dashGigModal'; el.className = 'modal-overlay active';
   el.innerHTML = `<div class="bg-white rounded-3xl max-w-lg w-full mx-4 max-h-[90vh] overflow-auto"><div class="p-7">
     <div class="flex justify-between items-start mb-4">
-      <div><span class="px-3 py-1 bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-full">${g.category}</span>
+      <div><span class="px-3 py-1 bg-[#272747]/10 text-[#272747] text-xs font-semibold rounded-full">${g.category}</span>
       <h2 class="text-xl font-bold mt-2 font-display">${g.title}</h2></div>
       <button onclick="document.getElementById('dashGigModal').remove()" class="w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-400 hover:bg-zinc-200">×</button>
     </div>
@@ -185,7 +185,7 @@ export function showGigDetailDash(gigId) {
     </div>
     <p class="text-zinc-600 text-sm mb-5">${g.desc}</p>
     <div class="flex items-center justify-between bg-zinc-50 rounded-xl p-4 mb-5">
-      <span class="text-2xl font-bold text-emerald-600">&#8369;${g.price}<span class="text-sm text-zinc-400 font-normal">/hr</span></span>
+      <span class="text-2xl font-bold text-[#272747]">&#8369;${g.price}<span class="text-sm text-zinc-400 font-normal">/hr</span></span>
       <div class="flex gap-2">
         <button onclick="toggleBookmark(${g.id})" id="bm_ddash_${g.id}" class="bookmark-btn${savedGigs.has(g.id) ? ' saved' : ''}">${savedGigs.has(g.id) ? '🔖' : '🔲'}</button>
         <button onclick="bookSession(${g.id}); document.getElementById('dashGigModal').remove();" class="btn-primary">Book Session</button>

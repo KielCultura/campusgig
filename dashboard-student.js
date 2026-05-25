@@ -38,20 +38,20 @@ function renderStudentHome(M, myB) {
     <p class="text-zinc-500 mb-8">Here's your learning activity.</p>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
       <div class="stat-card"><div class="flex items-center gap-4"><div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 text-xl"><i class="fa-solid fa-calendar-check"></i></div><div><p class="text-2xl font-bold">${myB.length}</p><p class="text-zinc-500 text-sm">Total Bookings</p></div></div></div>
-      <div class="stat-card"><div class="flex items-center gap-4"><div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-emerald-600 text-xl"><i class="fa-solid fa-circle-check"></i></div><div><p class="text-2xl font-bold">${myB.filter(b=>b.status==='completed').length}</p><p class="text-zinc-500 text-sm">Completed</p></div></div></div>
-      <div class="stat-card cursor-pointer hover:border-emerald-300" onclick="renderStudentDashboard('saved')"><div class="flex items-center gap-4"><div class="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 text-xl"><i class="fa-solid fa-bookmark"></i></div><div><p class="text-2xl font-bold">${savedGigs.size}</p><p class="text-zinc-500 text-sm">Saved Gigs</p></div></div></div>
+      <div class="stat-card"><div class="flex items-center gap-4"><div class="w-12 h-12 bg-[#272747]/10 rounded-2xl flex items-center justify-center text-[#272747] text-xl"><i class="fa-solid fa-circle-check"></i></div><div><p class="text-2xl font-bold">${myB.filter(b=>b.status==='completed').length}</p><p class="text-zinc-500 text-sm">Completed</p></div></div></div>
+      <div class="stat-card cursor-pointer hover:border-[#272747]/30" onclick="renderStudentDashboard('saved')"><div class="flex items-center gap-4"><div class="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center text-amber-600 text-xl"><i class="fa-solid fa-bookmark"></i></div><div><p class="text-2xl font-bold">${savedGigs.size}</p><p class="text-zinc-500 text-sm">Saved Gigs</p></div></div></div>
     </div>
     <h2 class="text-lg font-bold mb-4 font-display">Upcoming Sessions</h2>
     ${myB.filter(b=>b.status!=='completed'&&b.status!=='cancelled').length ? `
       <div class="card mb-8"><table class="data-table"><thead><tr><th>Service</th><th>Tutor</th><th>Date</th><th>Status</th><th>Fee</th></tr></thead><tbody>
-      ${myB.filter(b=>b.status!=='completed'&&b.status!=='cancelled').map(b=>{const g=gigs.find(x=>x.id===b.gigId);return`<tr><td class="font-medium">${g?.title||'N/A'}</td><td>${b.tutor}</td><td class="text-sm">${b.date} ${b.time}</td><td><span class="badge ${b.status==='confirmed'?'badge-green':'badge-yellow'}">${b.status}</span></td><td class="font-semibold text-emerald-600">&#8369;${b.total}</td></tr>`;}).join('')}
-      </tbody></table></div>` : `<div class="card p-8 text-center text-zinc-400 mb-8">No upcoming sessions. <span class="text-emerald-600 cursor-pointer font-medium" onclick="renderStudentDashboard('browse')">Browse services →</span></div>`}
+      ${myB.filter(b=>b.status!=='completed'&&b.status!=='cancelled').map(b=>{const g=gigs.find(x=>x.id===b.gigId);return`<tr><td class="font-medium">${g?.title||'N/A'}</td><td>${b.tutor}</td><td class="text-sm">${b.date} ${b.time}</td><td><span class="badge ${b.status==='confirmed'?'badge-green':'badge-yellow'}">${b.status}</span></td><td class="font-semibold text-[#272747]">&#8369;${b.total}</td></tr>`;}).join('')}
+      </tbody></table></div>` : `<div class="card p-8 text-center text-zinc-400 mb-8">No upcoming sessions. <span class="text-[#272747] cursor-pointer font-medium" onclick="renderStudentDashboard('browse')">Browse services →</span></div>`}
     <h2 class="text-lg font-bold mb-4 font-display">Recommended For You</h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
       ${gigs.filter(g=>g.status==='approved').slice(0,3).map(g=>`
         <div class="card cursor-pointer hover:shadow-lg transition-all hover:-translate-y-1" onclick="showGigDetailDash(${g.id})">
           <img src="${g.image}" class="w-full h-36 object-cover">
-          <div class="p-4"><span class="text-xs bg-zinc-100 text-zinc-600 px-2 py-1 rounded-full">${g.category}</span><p class="font-semibold mt-2 text-sm">${g.title}</p><div class="flex items-center justify-between mt-3"><span class="text-emerald-600 font-bold">&#8369;${g.price}/hr</span><span class="text-xs text-zinc-400">⭐ ${g.rating}</span></div></div>
+          <div class="p-4"><span class="text-xs bg-zinc-100 text-zinc-600 px-2 py-1 rounded-full">${g.category}</span><p class="font-semibold mt-2 text-sm">${g.title}</p><div class="flex items-center justify-between mt-3"><span class="text-[#272747] font-bold">&#8369;${g.price}/hr</span><span class="text-xs text-zinc-400">⭐ ${g.rating}</span></div></div>
         </div>`).join('')}
     </div>
   </div>`;
@@ -107,7 +107,7 @@ function renderStudentBookings(M, myB) {
         <td class="text-sm">${b.tutor}</td>
         <td class="text-sm">${b.date}<br><span class="text-zinc-400">${b.time}</span></td>
         <td><span class="badge ${b.status==='confirmed'?'badge-green':b.status==='pending'?'badge-yellow':b.status==='completed'?'badge-blue':'badge-red'}">${b.status}</span></td>
-        <td class="font-semibold text-emerald-600">&#8369;${b.total}</td>
+        <td class="font-semibold text-[#272747]">&#8369;${b.total}</td>
         <td>${b.status==='pending'||b.status==='confirmed'?`<button onclick="cancelB(${b.id})" class="text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg hover:bg-red-100">Cancel</button>`:''}</td>
       </tr>`;}).join('')}
     </tbody></table></div>` : `<div class="card p-12 text-center text-zinc-400"><p class="text-4xl mb-3">📅</p><p>No bookings yet.</p><button onclick="renderStudentDashboard('browse')" class="btn-primary mt-4">Browse Services</button></div>`}
@@ -133,7 +133,7 @@ function renderStudentSaved(M) {
               <p class="font-semibold mt-2 text-sm">${g.title}</p>
               <p class="text-xs text-zinc-400 mt-1">${g.tutor}</p>
               <div class="flex items-center justify-between mt-3">
-                <span class="text-emerald-600 font-bold">&#8369;${g.price}/hr</span>
+                <span class="text-[#272747] font-bold">&#8369;${g.price}/hr</span>
                 <span class="text-xs text-zinc-400">⭐ ${g.rating}</span>
               </div>
             </div>

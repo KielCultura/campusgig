@@ -39,7 +39,7 @@ function renderTutorHome(M, myG, myB, earned) {
       <div class="card mb-8"><table class="data-table"><thead><tr><th>Student</th><th>Service</th><th>Date</th><th>Actions</th></tr></thead><tbody>
         ${myB.filter(b=>b.status==='pending').map(b=>{const g=gigs.find(x=>x.id===b.gigId);return`<tr>
           <td class="font-medium">${b.student}</td><td class="text-sm text-zinc-600">${g?.title||'N/A'}</td><td class="text-sm">${b.date}</td>
-          <td class="flex gap-2"><button onclick="acceptB(${b.id})" class="text-xs bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-lg font-semibold hover:bg-emerald-100">Accept</button><button onclick="declineB(${b.id})" class="text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg hover:bg-red-100">Decline</button></td>
+          <td class="flex gap-2"><button onclick="acceptB(${b.id})" class="text-xs bg-[#272747]/10 text-[#272747] px-3 py-1.5 rounded-lg font-semibold hover:bg-[#272747]/10">Accept</button><button onclick="declineB(${b.id})" class="text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg hover:bg-red-100">Decline</button></td>
         </tr>`;}).join('')}</tbody></table></div>` : ''}
     <div class="flex items-center justify-between mb-4">
       <h2 class="text-lg font-bold font-display">My Services</h2>
@@ -49,7 +49,7 @@ function renderTutorHome(M, myG, myB, earned) {
       ${myG.length ? myG.map(g=>`
         <div class="card"><img src="${g.image}" class="w-full h-36 object-cover">
         <div class="p-4"><span class="badge ${g.status==='approved'?'badge-green':g.status==='pending'?'badge-yellow':'badge-red'}">${g.status}</span>
-        <p class="font-semibold text-sm mt-2 mb-1">${g.title}</p><p class="text-emerald-600 font-bold">&#8369;${g.price}/hr</p>
+        <p class="font-semibold text-sm mt-2 mb-1">${g.title}</p><p class="text-[#272747] font-bold">&#8369;${g.price}/hr</p>
         <p class="text-xs text-zinc-400 mt-1">⭐ ${g.rating} (${g.reviews} reviews)</p></div></div>`).join('') :
         `<div class="card p-8 text-center text-zinc-400 col-span-3"><p>No services yet.</p><button onclick="openAddServiceModal()" class="btn-primary mt-3">Add Your First Service</button></div>`}
     </div>
@@ -66,7 +66,7 @@ function renderTutorServices(M, myG) {
       ${myG.map(g=>`<tr>
         <td><div class="flex items-center gap-3"><img src="${g.image}" class="w-10 h-10 rounded-lg object-cover"><p class="font-medium text-sm">${g.title}</p></div></td>
         <td><span class="badge badge-blue">${g.category}</span></td>
-        <td class="font-semibold text-emerald-600">&#8369;${g.price}/hr</td>
+        <td class="font-semibold text-[#272747]">&#8369;${g.price}/hr</td>
         <td>${g.rating ? '⭐ '+g.rating+' ('+g.reviews+')' : '–'}</td>
         <td><span class="badge ${g.status==='approved'?'badge-green':g.status==='pending'?'badge-yellow':'badge-red'}">${g.status}</span></td>
         <td><button onclick="removeMyGig(${g.id})" class="text-xs text-red-500 hover:text-red-700">Remove</button></td>
@@ -84,9 +84,9 @@ function renderTutorRequests(M, myB) {
         <td class="font-medium">${b.student}</td><td class="text-sm text-zinc-600">${g?.title||'N/A'}</td>
         <td class="text-sm">${b.date} ${b.time}</td>
         <td><span class="badge ${b.status==='confirmed'?'badge-green':b.status==='pending'?'badge-yellow':b.status==='completed'?'badge-blue':'badge-red'}">${b.status}</span></td>
-        <td class="font-semibold text-emerald-600">&#8369;${b.total}</td>
+        <td class="font-semibold text-[#272747]">&#8369;${b.total}</td>
         <td class="flex gap-2">
-          ${b.status==='pending'?`<button onclick="acceptB(${b.id})" class="text-xs bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-lg font-semibold hover:bg-emerald-100">Accept</button><button onclick="declineB(${b.id})" class="text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg hover:bg-red-100">Decline</button>`:''}
+          ${b.status==='pending'?`<button onclick="acceptB(${b.id})" class="text-xs bg-[#272747]/10 text-[#272747] px-3 py-1.5 rounded-lg font-semibold hover:bg-[#272747]/10">Accept</button><button onclick="declineB(${b.id})" class="text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg hover:bg-red-100">Decline</button>`:''}
           ${b.status==='confirmed'?`<button onclick="markDone(${b.id})" class="text-xs bg-blue-50 text-blue-600 px-3 py-1.5 rounded-lg hover:bg-blue-100">Mark Done</button>`:''}
         </td>
       </tr>`;}).join('')}</tbody></table></div>` :
@@ -100,12 +100,12 @@ function renderTutorEarnings(M, myB, earned) {
     <h1 class="text-2xl font-bold font-display mb-1">Earnings</h1>
     <p class="text-zinc-500 mb-6">Your payout history and summary.</p>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-      <div class="stat-card border-l-4 border-emerald-500"><p class="text-zinc-500 text-sm mb-1">Total Earned</p><p class="text-3xl font-bold text-emerald-600">&#8369;${earned}</p></div>
+      <div class="stat-card border-l-4 border-[#272747]"><p class="text-zinc-500 text-sm mb-1">Total Earned</p><p class="text-3xl font-bold text-[#272747]">&#8369;${earned}</p></div>
       <div class="stat-card border-l-4 border-blue-500"><p class="text-zinc-500 text-sm mb-1">Sessions Done</p><p class="text-3xl font-bold text-blue-600">${done.length}</p></div>
       <div class="stat-card border-l-4 border-amber-500"><p class="text-zinc-500 text-sm mb-1">Avg per Session</p><p class="text-3xl font-bold text-amber-600">&#8369;${done.length ? Math.round(earned/done.length) : 0}</p></div>
     </div>
     ${done.length ? `<div class="card"><table class="data-table"><thead><tr><th>Student</th><th>Service</th><th>Date</th><th>Amount</th></tr></thead><tbody>
-      ${done.map(b=>{const g=gigs.find(x=>x.id===b.gigId);return`<tr><td class="font-medium">${b.student}</td><td class="text-sm text-zinc-600">${g?.title||'N/A'}</td><td class="text-sm">${b.date}</td><td class="font-semibold text-emerald-600">&#8369;${b.total}</td></tr>`;}).join('')}
+      ${done.map(b=>{const g=gigs.find(x=>x.id===b.gigId);return`<tr><td class="font-medium">${b.student}</td><td class="text-sm text-zinc-600">${g?.title||'N/A'}</td><td class="text-sm">${b.date}</td><td class="font-semibold text-[#272747]">&#8369;${b.total}</td></tr>`;}).join('')}
     </tbody></table></div>` : `<div class="card p-12 text-center text-zinc-400">No completed sessions yet.</div>`}
   </div>`;
 }
