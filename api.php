@@ -7,20 +7,21 @@
 $allowed_origins = ['https://kielcultura.github.io'];
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
-// Always send CORS headers
-if (in_array($origin, $allowed_origins)) {
+if ($origin && in_array($origin, $allowed_origins, true)) {
     header('Access-Control-Allow-Origin: ' . $origin);
+    header('Vary: Origin');
+    header('Access-Control-Allow-Credentials: true');
 } else {
-    // Allow all during debugging — remove this later
+    // Allow all during debugging / GitHub Pages development.
+    // In production, replace '*' with your exact origin list.
     header('Access-Control-Allow-Origin: *');
 }
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, Accept');
+header('Access-Control-Allow-Headers: Content-Type, Accept, X-Requested-With');
 header('Access-Control-Max-Age: 86400');
 
-// Kill preflight immediately
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(200);
+    http_response_code(204);
     exit;
 }
 
