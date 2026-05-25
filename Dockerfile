@@ -1,10 +1,10 @@
 FROM php:8.2-apache
 
-# Install PHP extensions needed for MySQL and sockets
+# Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql mysqli sockets
 
-# Enable Apache mod_rewrite for .htaccess
-RUN a2enmod rewrite
+# Enable Apache modules (rewrite + headers for CORS)
+RUN a2enmod rewrite headers
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -15,7 +15,7 @@ WORKDIR /var/www/html
 # Copy all project files
 COPY . .
 
-# Install PHP dependencies (Ratchet etc.)
+# Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
 # Fix permissions
