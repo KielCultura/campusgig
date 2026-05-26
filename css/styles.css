@@ -6,7 +6,7 @@
 /* ── LANDING ─────────────────────────────────────────────────────────────── */
 .hero-bg {
   background: linear-gradient(135deg, rgba(2,20,15,0.60) 0%, rgba(5,40,28,0.68) 100%),
-    url('./707432733_976618825336136_9180231065068832296_n.png') center/cover no-repeat;
+    url('../707432733_976618825336136_9180231065068832296_n.png') center/cover no-repeat;
   background-blend-mode: overlay;
 }
 .gig-card { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
