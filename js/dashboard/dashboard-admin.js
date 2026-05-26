@@ -1,4 +1,4 @@
-import { currentUser, gigs, bookings, users, apiFetch, showToast, loadGigs, loadUsers, loadBookings } from './api.js';
+import { currentUser, gigs, bookings, users, apiFetch, showToast, loadGigs, loadUsers, loadBookings } from '../api.js';
 import { buildSidebar } from './dashboard-student.js';
 import { openMessages } from '../messaging.js';
 

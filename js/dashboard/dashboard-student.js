@@ -1,4 +1,4 @@
-import { currentUser, gigs, bookings, apiFetch, showToast, loadBookings } from './api.js';
+import { currentUser, gigs, bookings, apiFetch, showToast, loadBookings } from '../api.js';
 import { savedGigs, toggleBookmark } from '../bookmarks-reviews.js';
 import { gigCardDash, showGigDetailDash, bookSession } from '../gigs.js';
 import { openMessages } from '../messaging.js';
