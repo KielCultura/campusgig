@@ -36,12 +36,12 @@
           </a>
           <div class="dropdown-content">
             <div class="grid grid-cols-1 gap-1 text-sm">
-              <div onclick="filterByCategory('ICT')" class="category-item cursor-pointer flex items-center gap-3"><span class="text-2xl">💻</span><div><p class="font-medium">ICT – Programming & Tech</p><p class="text-xs text-zinc-500">Web Dev, Python, Support Tech</p></div></div>
-              <div onclick="filterByCategory('Arts')" class="category-item cursor-pointer flex items-center gap-3"><span class="text-2xl">🎨</span><div><p class="font-medium">Creative Arts & Design</p><p class="text-xs text-zinc-500">Illustration, Digital Arts</p></div></div>
-              <div onclick="filterByCategory('Culinary')" class="category-item cursor-pointer flex items-center gap-3"><span class="text-2xl">🍳</span><div><p class="font-medium">Culinary & Food Services</p><p class="text-xs text-zinc-500">Cooking, Baking, Home Economics</p></div></div>
-              <div onclick="filterByCategory('STEM')" class="category-item cursor-pointer flex items-center gap-3"><span class="text-2xl">🔬</span><div><p class="font-medium">STEM – Math & Science</p><p class="text-xs text-zinc-500">Calculus, Physics, Biology</p></div></div>
-              <div onclick="filterByCategory('Business')" class="category-item cursor-pointer flex items-center gap-3"><span class="text-2xl">💼</span><div><p class="font-medium">Business & Entrepreneurship</p><p class="text-xs text-zinc-500">ABM, Management</p></div></div>
-              <div onclick="filterByCategory('Humanities')" class="category-item cursor-pointer flex items-center gap-3"><span class="text-2xl">📖</span><div><p class="font-medium">Humanities & Social Sciences</p><p class="text-xs text-zinc-500">HUMSS, Arts & Society</p></div></div>
+              <div onclick="filterByCategory('ICT')" class="category-item cursor-pointer flex items-center gap-3"><span class="text-2xl"><i class="fa-solid fa-laptop"></i></span><div><p class="font-medium">ICT – Programming & Tech</p><p class="text-xs text-zinc-500">Web Dev, Python, Support Tech</p></div></div>
+              <div onclick="filterByCategory('Arts')" class="category-item cursor-pointer flex items-center gap-3"><span class="text-2xl"><i class="fa-solid fa-palette"></i></span><div><p class="font-medium">Creative Arts & Design</p><p class="text-xs text-zinc-500">Illustration, Digital Arts</p></div></div>
+              <div onclick="filterByCategory('Culinary')" class="category-item cursor-pointer flex items-center gap-3"><span class="text-2xl"><i class="fa-solid fa-kitchen-set"></i></span><div><p class="font-medium">Culinary & Food Services</p><p class="text-xs text-zinc-500">Cooking, Baking, Home Economics</p></div></div>
+              <div onclick="filterByCategory('STEM')" class="category-item cursor-pointer flex items-center gap-3"><span class="text-2xl"><i class="fa-solid fa-microscope"></i></i></span><div><p class="font-medium">STEM – Math & Science</p><p class="text-xs text-zinc-500">Calculus, Physics, Biology</p></div></div>
+              <div onclick="filterByCategory('Business')" class="category-item cursor-pointer flex items-center gap-3"><span class="text-2xl"><i class="fa-solid fa-chart-line"></i></span><div><p class="font-medium">Business & Entrepreneurship</p><p class="text-xs text-zinc-500">ABM, Management</p></div></div>
+              <div onclick="filterByCategory('Humanities')" class="category-item cursor-pointer flex items-center gap-3"><span class="text-2xl"><i class="fa-solid fa-book-open"></i></span><div><p class="font-medium">Humanities & Social Sciences</p><p class="text-xs text-zinc-500">HUMSS, Arts & Society</p></div></div>
             </div>
           </div>
         </div>
@@ -87,11 +87,11 @@
             <i class="fa-solid fa-search text-sm"></i> Search
           </button>
         </div>
-        <div class="flex items-center justify-center gap-6 mt-6 text-sm text-zinc-400">
-          <span onclick="filterByCategory('ICT')"      class="cursor-pointer hover:text-white transition">💻 Coding</span>
-          <span onclick="filterByCategory('STEM')"     class="cursor-pointer hover:text-white transition">🔬 Math</span>
-          <span onclick="filterByCategory('Arts')"     class="cursor-pointer hover:text-white transition">🎨 Design</span>
-          <span onclick="filterByCategory('Culinary')" class="cursor-pointer hover:text-white transition">🍳 Cooking</span>
+        <div class="flex items-center justify-center gap-4 mt-6 flex-wrap">
+          <button onclick="filterByCategory('ICT')" class="bg-zinc-800 hover:bg-white-600 text-white px-5 py-2 rounded-full transition duration-300 shadow-md hover:scale-105">Coding</button>
+          <button onclick="filterByCategory('STEM')" class="bg-zinc-800 hover:bg-white-600 text-white px-5 py-2 rounded-full transition duration-300 shadow-md hover:scale-105">Math</button>
+          <button onclick="filterByCategory('Arts')" class="bg-zinc-800 hover:bg-white-600 text-white px-5 py-2 rounded-full transition duration-300 shadow-md hover:scale-105">Design</button>
+          <button onclick="filterByCategory('Culinary')" class="bg-zinc-800 hover:bg-white-600 text-white px-5 py-2 rounded-full transition duration-300 shadow-md hover:scale-105">Cooking</button>
         </div>
       </div>
     </div>
@@ -120,17 +120,17 @@
       <p class="text-center text-zinc-500 max-w-md mx-auto mb-16">Three simple steps to start learning from your peers</p>
       <div class="grid md:grid-cols-3 gap-10">
         <div class="text-center">
-          <div class="w-20 h-20 mx-auto bg-[#272747]/10 text-[#272747] rounded-3xl flex items-center justify-center text-4xl mb-6">🔍</div>
+          <div class="w-20 h-20 mx-auto bg-[#272747]/10 text-[#272747] rounded-3xl flex items-center justify-center text-4xl mb-6"><i class="fa-solid fa-magnifying-glass"></i></div>
           <h3 class="font-semibold text-xl mb-2 font-display">1. Browse & Search</h3>
           <p class="text-zinc-500">Find talented students offering services in your campus or online</p>
         </div>
         <div class="text-center">
-          <div class="w-20 h-20 mx-auto bg-[#272747]/10 text-[#272747] rounded-3xl flex items-center justify-center text-4xl mb-6">💬</div>
+          <div class="w-20 h-20 mx-auto bg-[#272747]/10 text-[#272747] rounded-3xl flex items-center justify-center text-4xl mb-6"><i class="fa-regular fa-message"></i></div>
           <h3 class="font-semibold text-xl mb-2 font-display">2. Message & Book</h3>
           <p class="text-zinc-500">Chat directly and schedule a session that fits your timetable</p>
         </div>
         <div class="text-center">
-          <div class="w-20 h-20 mx-auto bg-[#272747]/10 text-[#272747] rounded-3xl flex items-center justify-center text-4xl mb-6">⭐</div>
+          <div class="w-20 h-20 mx-auto bg-[#272747]/10 text-[#272747] rounded-3xl flex items-center justify-center text-4xl mb-6"><i class="fa-regular fa-star"></i></div>
           <h3 class="font-semibold text-xl mb-2 font-display">3. Learn & Review</h3>
           <p class="text-zinc-500">Attend the session and leave a review to help others</p>
         </div>
@@ -241,9 +241,9 @@
         <div class="mt-6 p-4 bg-zinc-50 rounded-2xl border border-zinc-100">
           <p class="text-xs font-semibold text-zinc-500 mb-3 uppercase tracking-wide">Demo Accounts</p>
           <div class="grid grid-cols-3 gap-2">
-            <button onclick="fillDemo('student')" class="text-xs py-2 px-3 rounded-xl bg-blue-50 text-blue-700 font-semibold hover:bg-blue-100 transition">👨‍🎓 Student</button>
-            <button onclick="fillDemo('tutor')"   class="text-xs py-2 px-3 rounded-xl bg-[#272747]/10 text-[#272747] font-semibold hover:bg-[#272747]/10 transition">👨‍🏫 Tutor</button>
-            <button onclick="fillDemo('admin')"   class="text-xs py-2 px-3 rounded-xl bg-orange-50 text-orange-700 font-semibold hover:bg-orange-100 transition">⚙️ Admin</button>
+            <button onclick="fillDemo('student')" class="text-xs py-2 px-3 rounded-xl bg-blue-50 text-blue-700 font-semibold hover:bg-blue-100 transition"> Student</button>
+            <button onclick="fillDemo('tutor')"   class="text-xs py-2 px-3 rounded-xl bg-[#272747]/10 text-[#272747] font-semibold hover:bg-[#272747]/10 transition"> Tutor</button>
+            <button onclick="fillDemo('admin')"   class="text-xs py-2 px-3 rounded-xl bg-orange-50 text-orange-700 font-semibold hover:bg-orange-100 transition"> Admin</button>
           </div>
         </div>
       </div>
@@ -256,8 +256,8 @@
           <div>
             <label class="block text-sm font-semibold mb-2 text-zinc-700">I want to join as...</label>
             <div class="grid grid-cols-2 gap-3">
-              <div class="role-card selected" id="roleStudent" onclick="selectRole('student')"><div class="text-3xl mb-2">👨‍🎓</div><p class="font-semibold text-sm">Student</p><p class="text-xs text-zinc-500 mt-1">Browse & book sessions</p></div>
-              <div class="role-card"           id="roleTutor"   onclick="selectRole('tutor')"><div class="text-3xl mb-2">👨‍🏫</div><p class="font-semibold text-sm">Tutor</p><p class="text-xs text-zinc-500 mt-1">Offer your skills & earn</p></div>
+              <div class="role-card selected" id="roleStudent" onclick="selectRole('student')"><div class="text-3xl mb-2"></div><p class="font-semibold text-sm">Student</p><p class="text-xs text-zinc-500 mt-1">Browse & book sessions</p></div>
+              <div class="role-card"           id="roleTutor"   onclick="selectRole('tutor')"><div class="text-3xl mb-2"></div><p class="font-semibold text-sm">Tutor</p><p class="text-xs text-zinc-500 mt-1">Offer your skills & earn</p></div>
             </div>
           </div>
           <button onclick="handleRegister()" class="btn-primary w-full mt-2">Create Account</button>

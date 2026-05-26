@@ -87,7 +87,7 @@ export function renderNotificationsView() {
   markAllNotifsRead();
   M.innerHTML = `<div class="fade-in">
     <div class="flex items-center justify-between mb-6">
-      <div><h1 class="text-2xl font-bold font-display mb-1">Notifications 🔔</h1><p class="text-zinc-500">Your recent activity updates.</p></div>
+      <div><h1 class="text-2xl font-bold font-display mb-1">Notifications</h1><p class="text-zinc-500">Your recent activity updates.</p></div>
       <button onclick="clearNotifications()" class="text-sm text-zinc-400 hover:text-red-500 font-medium">Clear all</button>
     </div>
     <div class="card overflow-hidden" style="max-width:600px;">
