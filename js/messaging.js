@@ -1,4 +1,4 @@
-import { currentUser, showToast } from '../api.js';
+import { currentUser, showToast } from './api.js';
 import { addNotification } from '../notifications.js';
 
 // ── PUSHER CONFIG ─────────────────────────────────────────────────────────────

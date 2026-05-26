@@ -1,10 +1,10 @@
-import { currentUser, gigs, loadGigs, loadUsers, loadBookings } from '../api.js';
+import { currentUser, gigs, loadGigs, loadUsers, loadBookings } from './api.js';
 import { connectWS } from './messaging.js';
 import { updateNotifBadge } from './notifications.js';
-import { renderGigs } from '../gigs.js';
-import { renderStudentDashboard } from './dashboard-student.js';
-import { renderTutorDashboard } from './dashboard-tutor.js';
-import { renderAdminDashboard } from './dashboard-admin.js';
+import { renderGigs } from './gigs.js';
+import { renderStudentDashboard } from './dashboard/dashboard-student.js';
+import { renderTutorDashboard } from './dashboard/dashboard-tutor.js';
+import { renderAdminDashboard } from './dashboard/dashboard-admin.js';
 
 // ── SHOW LANDING ──────────────────────────────────────────────────────────────
 export async function showLanding() {
