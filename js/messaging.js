@@ -1,5 +1,5 @@
-import { currentUser, showToast } from './api.js';
-import { addNotification } from './notifications.js';
+import { currentUser, showToast } from '../api.js';
+import { addNotification } from '../notifications.js';
 
 // ── PUSHER CONFIG ─────────────────────────────────────────────────────────────
 const PUSHER_KEY     = '4a874ebc8d8abeb0fcbf';

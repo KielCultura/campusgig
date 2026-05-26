@@ -1,5 +1,5 @@
 import { currentUser, gigs, bookings, apiFetch, showToast, loadGigs, loadBookings } from './api.js';
-import { addNotification } from './notifications.js';
+import { addNotification } from '../notifications.js';
 import { buildSidebar } from './dashboard-student.js';
 
 export function renderTutorDashboard(s = 'home') {

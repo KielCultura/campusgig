@@ -1,15 +1,15 @@
 // ── IMPORTS ───────────────────────────────────────────────────────────────────
-import { loadGigs, gigs, showToast } from './api.js';
+import { loadGigs, gigs, showToast } from '../api.js';
 import { showLanding, showDashboard } from './router.js';
-import { openAuthModal, closeAuthModal, switchTab, selectRole, fillDemo, handleLogin, handleRegister, logout, restoreSession } from './auth.js';
-import { renderGigs, showGigDetail, hideModal, filterByCategory, showAllGigs, performSearch, checkAuthForService, showSellModal, hideSellModal, submitService, bookSession, gigCardDash, showGigDetailDash } from './gigs.js';
-import { toggleBookmark } from './bookmarks-reviews.js';
-import { setRating, submitReview } from './bookmarks-reviews.js';
+import { openAuthModal, closeAuthModal, switchTab, selectRole, fillDemo, handleLogin, handleRegister, logout, restoreSession } from '../auth.js';
+import { renderGigs, showGigDetail, hideModal, filterByCategory, showAllGigs, performSearch, checkAuthForService, showSellModal, hideSellModal, submitService, bookSession, gigCardDash, showGigDetailDash } from '../gigs.js';
+import { toggleBookmark } from '../bookmarks-reviews.js';
+import { setRating, submitReview } from '../bookmarks-reviews.js';
 import { toggleNotifPanel, markNotifRead, markAllNotifsRead, renderNotificationsView, clearNotifications, updateNotifBadge } from './notifications.js';
 import { openMessages, openConversation, sendMessage, openNewChatModal, filterUserList, startChatWith } from './messaging.js';
-import { renderStudentDashboard, buildSidebar, sFilter, setMinRating, applyFilters, cancelB, loadAndShowStudentBookings } from './dashboard-student.js';
-import { renderTutorDashboard, acceptB, declineB, markDone, removeMyGig, openAddServiceModal, submitTutorService, loadAndShowTutorBookings } from './dashboard-tutor.js';
-import { renderAdminDashboard, toggleUser, delUser, approveG, rejectG, adminDelGig, loadAndShowAdminBookings } from './dashboard-admin.js';
+import { renderStudentDashboard, buildSidebar, sFilter, setMinRating, applyFilters, cancelB, loadAndShowStudentBookings } from '../dashboard-student.js';
+import { renderTutorDashboard, acceptB, declineB, markDone, removeMyGig, openAddServiceModal, submitTutorService, loadAndShowTutorBookings } from '../dashboard-tutor.js';
+import { renderAdminDashboard, toggleUser, delUser, approveG, rejectG, adminDelGig, loadAndShowAdminBookings } from '../dashboard-admin.js';
 
 // ── EXPOSE GLOBALS (used by inline onclick handlers in HTML) ──────────────────
 // Auth

@@ -1,7 +1,7 @@
-import { currentUser, gigs, loadGigs, loadUsers, loadBookings } from './api.js';
+import { currentUser, gigs, loadGigs, loadUsers, loadBookings } from '../api.js';
 import { connectWS } from './messaging.js';
 import { updateNotifBadge } from './notifications.js';
-import { renderGigs } from './gigs.js';
+import { renderGigs } from '../gigs.js';
 import { renderStudentDashboard } from './dashboard-student.js';
 import { renderTutorDashboard } from './dashboard-tutor.js';
 import { renderAdminDashboard } from './dashboard-admin.js';
