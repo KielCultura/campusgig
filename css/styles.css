@@ -16,7 +16,7 @@
 /* ── LANDING ─────────────────────────────────────────────────────────────── */
 .hero-bg {
   background: linear-gradient(135deg, rgba(5,32,41,0.5) 0%, rgba(24,51,35,0.4) 100%),
-    url('pic.png') center/cover no-repeat;
+    url('pic.jpg') center 80% /cover no-repeat;
 }
 .gig-card { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
 .gig-card:hover { transform: translateY(-10px); box-shadow: 0 24px 40px -8px rgba(43,95,78,0.3); }
