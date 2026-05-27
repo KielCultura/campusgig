@@ -15,7 +15,7 @@ export function renderGigs(list) {
         <button class="bookmark-btn${savedGigs.has(g.id) ? ' saved' : ''}"
           style="position:absolute;top:10px;right:10px;"
           onclick="event.stopPropagation();toggleBookmark(${g.id})"
-          id="bm_land_${g.id}">${savedGigs.has(g.id) ? '🔖' : '🔲'}</button>
+          id="bm_land_${g.id}"><i class="${savedGigs.has(g.id) ? 'fa-solid' : 'fa-regular'} fa-bookmark"></i></button>
       </div>
       <div class="p-5">
         <div class="flex items-center gap-3 mb-3">
@@ -55,7 +55,7 @@ export function showGigDetail(gigId) {
     <div class="bg-zinc-50 border rounded-2xl p-5 flex items-center justify-between">
       <div><p class="text-xs text-zinc-400">Starting at</p><p class="text-3xl font-bold text-[#272747]">&#8369;${g.price}<span class="text-sm text-zinc-400 font-normal">/hr</span></p></div>
       <div class="flex gap-2">
-        <button onclick="toggleBookmark(${g.id})" id="bm_modal_${g.id}" class="bookmark-btn${savedGigs.has(g.id) ? ' saved' : ''}">${savedGigs.has(g.id) ? '🔖' : '🔲'}</button>
+        <button onclick="toggleBookmark(${g.id})" id="bm_modal_${g.id}" class="bookmark-btn${savedGigs.has(g.id) ? ' saved' : ''}"><i class="${savedGigs.has(g.id) ? 'fa-solid' : 'fa-regular'} fa-bookmark"></i></button>
         <button onclick="bookSession(${g.id})" class="btn-primary">Book a Session</button>
       </div>
     </div>
@@ -149,7 +149,7 @@ export function gigCardDash(g) {
     <div class="relative cursor-pointer" onclick="showGigDetailDash(${g.id})">
       <img src="${g.image}" class="w-full h-40 object-cover">
       <button class="bookmark-btn${savedGigs.has(g.id) ? ' saved' : ''}" style="position:absolute;top:8px;right:8px;"
-        onclick="event.stopPropagation();toggleBookmark(${g.id})" id="bm_dash_${g.id}">${savedGigs.has(g.id) ? '✓' : 'o'}</button>
+        onclick="event.stopPropagation();toggleBookmark(${g.id})" id="bm_dash_${g.id}"><i class="${savedGigs.has(g.id) ? 'fa-solid' : 'fa-regular'} fa-bookmark"></i></button>
     </div>
     <div class="p-5 cursor-pointer" onclick="showGigDetailDash(${g.id})">
       <div class="flex items-center gap-2 mb-3"><img src="${g.avatar}" class="w-7 h-7 rounded-full">
@@ -187,7 +187,7 @@ export function showGigDetailDash(gigId) {
     <div class="flex items-center justify-between bg-zinc-50 rounded-xl p-4 mb-5">
       <span class="text-2xl font-bold text-[#272747]">&#8369;${g.price}<span class="text-sm text-zinc-400 font-normal">/hr</span></span>
       <div class="flex gap-2">
-        <button onclick="toggleBookmark(${g.id})" id="bm_ddash_${g.id}" class="bookmark-btn${savedGigs.has(g.id) ? ' saved' : ''}">${savedGigs.has(g.id) ? '✓' : 'o'}</button>
+        <button onclick="toggleBookmark(${g.id})" id="bm_ddash_${g.id}" class="bookmark-btn${savedGigs.has(g.id) ? ' saved' : ''}"><i class="${savedGigs.has(g.id) ? 'fa-solid' : 'fa-regular'} fa-bookmark"></i></button>
         <button onclick="bookSession(${g.id}); document.getElementById('dashGigModal').remove();" class="btn-primary">Book Session</button>
       </div>
     </div>

@@ -21,7 +21,7 @@ export function toggleBookmark(gigId) {
   ['bm_land_', 'bm_dash_', 'bm_ddash_', 'bm_modal_'].forEach(pfx => {
     const btn = document.getElementById(pfx + gigId);
     if (btn) {
-      btn.textContent = savedGigs.has(gigId) ? '🔖' : '🔲';
+      btn.innerHTML = `<i class="${savedGigs.has(gigId) ? 'fa-solid' : 'fa-regular'} fa-bookmark"></i>`;
       btn.classList.toggle('saved', savedGigs.has(gigId));
     }
   });
