@@ -1,4 +1,4 @@
-import { gigs, currentUser, apiFetch, showToast, loadGigs } from './api.js';
+import { gigs, currentUser, apiFetch, showToast, loadGigs, loadBookings } from './api.js';
 import { savedGigs, toggleBookmark, renderReviewsList, setRating, submitReview, gigReviews } from './bookmarks-reviews.js';
 import { addNotification } from './notifications.js';
 import { openAuthModal } from './auth.js';
@@ -115,6 +115,7 @@ export async function bookSession(gigId) {
   const g = gigs.find(x => x.id == gigId);
   const res = await apiFetch('book', { gig_id: gigId, student_id: currentUser.id }, 'POST');
   if (!res) return;
+  await loadBookings(currentUser.id, currentUser.role);
   hideModal();
   addNotification('booking', `Your session with ${g ? g.tutor : 'the tutor'} has been requested! Awaiting confirmation.`);
   showToast('🎉 Session booked with ' + (g ? g.tutor : '') + '!');
