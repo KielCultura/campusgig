@@ -149,10 +149,29 @@ export async function openConversation(convId) {
     </div>
     <div class="chat-messages" id="msgList"><div style="text-align:center;color:#94a3b8;padding:24px;font-size:13px;">Loading…</div></div>
     <div class="chat-input-area">
-      <textarea id="msgInput" class="chat-input" rows="1" placeholder="Type a message…"
-        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage();}"></textarea>
-      <button class="chat-send-btn" onclick="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+      <textarea id="msgInput" class="chat-input" rows="1" placeholder="Type a message…"></textarea>
+      <button class="chat-send-btn" id="msgSendBtn"><i class="fa-solid fa-paper-plane"></i></button>
     </div>`;
+
+  const msgInput = document.getElementById('msgInput');
+  const sendBtn  = document.getElementById('msgSendBtn');
+
+  msgInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  function autoGrow() {
+    msgInput.style.height = 'auto';
+    msgInput.style.height = Math.min(msgInput.scrollHeight, 120) + 'px';
+  }
+  msgInput.addEventListener('input', autoGrow);
+  msgInput.addEventListener('paste', () => setTimeout(autoGrow, 0));
+
+  sendBtn.addEventListener('click', sendMessage);
+  msgInput.focus();
 
   renderConvList();
   const msgs = await chatFetch('get_messages', { conversation_id: convId });
