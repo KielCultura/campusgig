@@ -34,7 +34,7 @@ export function renderStudentDashboard(s = 'home') {
 
 function renderStudentHome(M, myB) {
   M.innerHTML = `<div class="fade-in">
-    <h1 class="text-2xl font-bold font-display mb-1">Welcome back, ${currentUser.name.split(' ')[0]}! 👋</h1>
+    <h1 class="text-2xl font-bold font-display mb-1">Welcome back, ${currentUser.name.split(' ')[0]}! </h1>
     <p class="text-zinc-500 mb-8">Here's your learning activity.</p>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
       <div class="stat-card"><div class="flex items-center gap-4"><div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 text-xl"><i class="fa-solid fa-calendar-check"></i></div><div><p class="text-2xl font-bold">${myB.length}</p><p class="text-zinc-500 text-sm">Total Bookings</p></div></div></div>
@@ -51,7 +51,7 @@ function renderStudentHome(M, myB) {
       ${gigs.filter(g=>g.status==='approved').slice(0,3).map(g=>`
         <div class="card cursor-pointer hover:shadow-lg transition-all hover:-translate-y-1" onclick="showGigDetailDash(${g.id})">
           <img src="${g.image}" class="w-full h-36 object-cover">
-          <div class="p-4"><span class="text-xs bg-zinc-100 text-zinc-600 px-2 py-1 rounded-full">${g.category}</span><p class="font-semibold mt-2 text-sm">${g.title}</p><div class="flex items-center justify-between mt-3"><span class="text-[#272747] font-bold">&#8369;${g.price}/hr</span><span class="text-xs text-zinc-400">⭐ ${g.rating}</span></div></div>
+          <div class="p-4"><span class="text-xs bg-zinc-100 text-zinc-600 px-2 py-1 rounded-full">${g.category}</span><p class="font-semibold mt-2 text-sm">${g.title}</p><div class="flex items-center justify-between mt-3"><span class="text-[#272747] font-bold">&#8369;${g.price}/hr</span><span class="text-xs text-zinc-400"><i class="fa-solid fa-star" style="color: #2b5f4e;"></i> ${g.rating}</span></div></div>
         </div>`).join('')}
     </div>
   </div>`;
@@ -82,7 +82,7 @@ function renderStudentBrowse(M) {
         <div>
           <label class="block text-xs font-semibold text-zinc-500 mb-2">Sort By</label>
           <select id="sortFilter" onchange="applyFilters()" class="form-input text-sm py-2">
-            <option value="rating">⭐ Top Rated</option>
+            <option value="rating"> Top Rated</option>
             <option value="price_asc">₱ Price: Low to High</option>
             <option value="price_desc">₱ Price: High to Low</option>
           </select>
@@ -134,7 +134,7 @@ function renderStudentSaved(M) {
               <p class="text-xs text-zinc-400 mt-1">${g.tutor}</p>
               <div class="flex items-center justify-between mt-3">
                 <span class="text-[#272747] font-bold">&#8369;${g.price}/hr</span>
-                <span class="text-xs text-zinc-400">⭐ ${g.rating}</span>
+                <span class="text-xs text-zinc-400"> ${g.rating}</span>
               </div>
             </div>
           </div>`).join('')}

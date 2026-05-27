@@ -47,7 +47,7 @@ export function showGigDetail(gigId) {
       <img src="${g.avatar}" class="w-12 h-12 rounded-2xl">
       <div><p class="font-semibold">${g.tutor}</p><p class="text-sm text-zinc-500">UC Student Tutor</p></div>
       <div class="ml-auto flex items-center gap-2 bg-zinc-50 px-4 py-2 rounded-2xl border">
-        <span class="text-amber-400">⭐</span>
+        <span class="text-amber-400"> </span>
         <div><p class="font-bold text-sm">${g.rating}</p><p class="text-xs text-zinc-400">${g.reviews} reviews</p></div>
       </div>
     </div>
@@ -66,7 +66,7 @@ export function showGigDetail(gigId) {
         <div class="mt-4 bg-zinc-50 rounded-2xl p-4 border">
           <p class="font-semibold text-sm mb-3">Leave a Review</p>
           <div class="flex gap-1 mb-3" id="starRow_${g.id}">
-            ${[1,2,3,4,5].map(n => `<button class="star-btn" onclick="setRating(${g.id},${n})" id="star_${g.id}_${n}">☆</button>`).join('')}
+            ${[1,2,3,4,5].map(n => `<button class="star-btn" onclick="setRating(${g.id},${n})" id="star_${g.id}_${n}"> <i class="fa-solid fa-star" style="color: #2b5f4e;"></i></button>`).join('')}
           </div>
           <textarea id="reviewText_${g.id}" class="form-input mb-3 text-sm" rows="2" placeholder="Share your experience…"></textarea>
           <button onclick="submitReview(${g.id})" class="btn-primary text-sm py-2 px-4">Submit Review</button>
@@ -149,7 +149,7 @@ export function gigCardDash(g) {
     <div class="relative cursor-pointer" onclick="showGigDetailDash(${g.id})">
       <img src="${g.image}" class="w-full h-40 object-cover">
       <button class="bookmark-btn${savedGigs.has(g.id) ? ' saved' : ''}" style="position:absolute;top:8px;right:8px;"
-        onclick="event.stopPropagation();toggleBookmark(${g.id})" id="bm_dash_${g.id}">${savedGigs.has(g.id) ? '🔖' : '🔲'}</button>
+        onclick="event.stopPropagation();toggleBookmark(${g.id})" id="bm_dash_${g.id}">${savedGigs.has(g.id) ? '✓' : 'o'}</button>
     </div>
     <div class="p-5 cursor-pointer" onclick="showGigDetailDash(${g.id})">
       <div class="flex items-center gap-2 mb-3"><img src="${g.avatar}" class="w-7 h-7 rounded-full">
@@ -158,7 +158,7 @@ export function gigCardDash(g) {
       <p class="font-semibold leading-snug mb-3">${g.title}</p>
       <div class="flex items-center justify-between">
         <span class="text-[#272747] font-bold text-lg">&#8369;${g.price}<span class="text-xs text-zinc-400 font-normal">/hr</span></span>
-        <span class="text-sm">⭐ ${g.rating}</span>
+        <span class="text-sm"><i class="fa-solid fa-star" style="color: #2b5f4e;"></i> ${g.rating}</span>
       </div>
     </div>
   </div>`;
@@ -181,13 +181,13 @@ export function showGigDetailDash(gigId) {
     <div class="flex items-center gap-3 mb-4">
       <img src="${g.avatar}" class="w-10 h-10 rounded-xl">
       <div><p class="font-semibold text-sm">${g.tutor}</p><p class="text-xs text-zinc-400">UC Student Tutor</p></div>
-      <div class="ml-auto text-sm">⭐ ${g.rating} <span class="text-zinc-400">(${(gigReviews[g.id] || []).length})</span></div>
+      <div class="ml-auto text-sm"><i class="fa-solid fa-star" style="color: #2b5f4e;"></i> ${g.rating} <span class="text-zinc-400">(${(gigReviews[g.id] || []).length})</span></div>
     </div>
     <p class="text-zinc-600 text-sm mb-5">${g.desc}</p>
     <div class="flex items-center justify-between bg-zinc-50 rounded-xl p-4 mb-5">
       <span class="text-2xl font-bold text-[#272747]">&#8369;${g.price}<span class="text-sm text-zinc-400 font-normal">/hr</span></span>
       <div class="flex gap-2">
-        <button onclick="toggleBookmark(${g.id})" id="bm_ddash_${g.id}" class="bookmark-btn${savedGigs.has(g.id) ? ' saved' : ''}">${savedGigs.has(g.id) ? '🔖' : '🔲'}</button>
+        <button onclick="toggleBookmark(${g.id})" id="bm_ddash_${g.id}" class="bookmark-btn${savedGigs.has(g.id) ? ' saved' : ''}">${savedGigs.has(g.id) ? '✓' : 'o'}</button>
         <button onclick="bookSession(${g.id}); document.getElementById('dashGigModal').remove();" class="btn-primary">Book Session</button>
       </div>
     </div>
