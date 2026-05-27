@@ -51,13 +51,14 @@ export async function loadUsers() {
 export async function loadBookings(userId, role) {
   const data = await apiFetch('bookings', userId ? { user_id: userId, role } : {});
   if (data) {
-    bookings = data.map(b => ({
-      ...b,
-      gigId: b.gig_id,
-      date: b.session_date,
-      time: b.session_time,
-      total: parseFloat(b.total)
-    }));
+   bookings = data.map(b => ({
+  ...b,
+  gigId: Number(b.gig_id),
+  studentEmail: b.student_email,
+  date: b.session_date,
+  time: b.session_time,
+  total: parseFloat(b.total)
+}));
   }
 }
 
