@@ -126,7 +126,7 @@ function renderStudentSaved(M) {
             <div class="relative cursor-pointer" onclick="showGigDetailDash(${g.id})">
               <img src="${g.image}" class="w-full h-36 object-cover">
               <button class="bookmark-btn saved" style="position:absolute;top:8px;right:8px;"
-                onclick="event.stopPropagation();toggleBookmark(${g.id});renderStudentDashboard('saved')">🔖</button>
+                onclick="event.stopPropagation();toggleBookmark(${g.id});renderStudentDashboard('saved')"><i class="fa-solid fa-bookmark"></i></button>
             </div>
             <div class="p-4 cursor-pointer" onclick="showGigDetailDash(${g.id})">
               <span class="text-xs bg-zinc-100 text-zinc-600 px-2 py-1 rounded-full">${g.category}</span>
