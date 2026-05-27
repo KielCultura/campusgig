@@ -159,3 +159,11 @@
   transition:opacity .3s; pointer-events:none; white-space:nowrap; 
 }
 #toast.show { opacity: 1; }
+/* ── LOGIN BUTTON ───────────────────────────────────────────────────────── */
+#loginBtn {
+  color: white;
+  background: #272747;
+}
+#loginBtn:hover {
+  background: #363684;
+}
